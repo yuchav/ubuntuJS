@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="bootstrap/js/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<style>
+.row-fluid .thumbnails li.span4 {
+}
+p {
+	margin:5px 0 0 0;
+	text-align:center
+}
+img {
+	height:80px;
+	width:100%
+}
+li.active {
+	font-weight:bold
+}
+.nav-tabs .dropdown-menu {
+	border-radius:5px
+}
+.row-fluid li{ cursor: pointer}
+</style>
+</head>
+<body>
+<div class="tabbable" style="margin:10px; font-size:12px">
+  <ul class="nav nav-tabs">
+    <li class="active" style="margin-left:20px"><a href="#tab1" data-toggle="tab">系统壁纸</a></li>
+    <li><a href="#tab2" data-toggle="tab">自定义</a></li>
+    <div class="btn-group pull-right">
+      <button class="btn current" style="font-size:12px; color:#555">拉伸</button>
+      <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li style="font-size:12px; color:#555" class="paperCenter"><a href="#">居中</a></li>
+        <li style="font-size:12px; color:#555" class="paperRepeat"><a href="#">平铺</a></li>
+        <li style="font-size:12px; color:#555" class="paperDraw"><a href="#">拉伸</a></li>
+      </ul>
+    </div>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <p>
+      <div class="row-fluid">
+        <ul class="thumbnails" style="margin:0 20px">
+          <li class="span4"> <a class="thumbnail"> <img data="image/paper/blue_glow.jpg" src="image/paper/blue_glow.jpg">
+            <p>默认壁纸</p>
+            </a> </li>
+          <li class="span4"> <a class="thumbnail"> <img data="image/paper/blue.jpg" src="image/paper/theme_blue.jpg">
+            <p>Dream</p>
+            </a> </li>
+          <li class="span4"> <a class="thumbnail"> <img data="image/paper/green_glow.jpg" src="image/paper/theme_green_glow.jpg">
+            <p>Morning</p>
+            </a> </li>
+        </ul>
+        <ul class="thumbnails" style="margin:0 20px">
+        </ul>
+      </div>
+      </p>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <p>自定义</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script>
+$(function(){
+	var src="image/paper/blue_glow.jpg";
+	var bodyPaper=top.$('.bodyPaper');
+	var _body=top.$('body');
+	$('.row-fluid li').click(function(){
+		src=$(this).find('img').attr('data');
+		img=bodyPaper.find('img');
+		switch($('.current').text())
+		{
+			case '居中':
+				bodyPaper.hide();	
+				_body.css('background','url('+src+') no-repeat center');
+				break;
+			case '平铺':
+				bodyPaper.hide();	
+				_body.css('background','url('+src+')');
+				break;	
+			case '拉伸':
+				img.attr('src',src);
+				bodyPaper.show();	
+				_body.css('background','');
+				break;	
+		}
+	});
+	//居中
+	$('.paperCenter').click(function(){
+		bodyPaper.hide();	
+		_body.css('background','url('+src+') no-repeat center');
+		$('.current').text($(this).text());
+	});
+	//平铺
+	$('.paperRepeat').click(function(){
+		bodyPaper.hide();	
+		_body.css('background','url('+src+')');
+		$('.current').text($(this).text());
+	});
+	//拉伸
+	$('.paperDraw').click(function(){
+		bodyPaper.show();	
+		_body.css('background','');
+		$('.current').text($(this).text());
+	});
+})
+</script>
